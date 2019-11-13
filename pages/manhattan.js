@@ -25,7 +25,7 @@ export default class Manhattan extends React.Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<MapView 
+				<MapView
 					onMapReady={this.onMapReady}
 					style={[styles.map, { flex: 1, marginBottom: this.state.marginBottom }]}
 					initialRegion={{

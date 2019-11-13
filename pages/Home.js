@@ -1,6 +1,7 @@
 import React from 'react'
-import { StyleSheet, View, ScrollView, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, View, ScrollView, TouchableOpacity} from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { Container, Header, Content, Button, Text } from 'native-base';
 
 class Home extends React.Component {
 
@@ -14,23 +15,25 @@ class Home extends React.Component {
 
    render() {
       return (
+         <Container>
          <View style={{styles}} >
-            <TouchableOpacity onPress={this.goToAbout}>
+            <Button onPress={this.goToAbout}>
                <Text>This is HOME!</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.goToManhattan}>
+            </Button>
+            <Button onPress={this.goToManhattan}>
                <Text>Manhattan</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.goToAbout}>
+            </Button>
+            <Button onPress={this.goToManhattan}>
                <Text>This is HOME!</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.goToAbout}>
+            </Button>
+            <Button onPress={this.goToManhattan}>
                <Text>This is HOME!</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.goToAbout}>
+            </Button>
+            <Button onPress={this.goToManhattan}>
                <Text>This is HOME!</Text>
-            </TouchableOpacity>
+            </Button>
          </View>
+         </Container>
       )
    }
 }
