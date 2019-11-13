@@ -26,6 +26,7 @@ export default class StatenIsland extends React.Component {
 		return (
 			<View style={styles.container}>
 				<MapView 
+					provider={PROVIDER_GOOGLE}
 					onMapReady={this.onMapReady}
 					style={[styles.map, { flex: 1, marginBottom: this.state.marginBottom }]}
 					initialRegion={{
