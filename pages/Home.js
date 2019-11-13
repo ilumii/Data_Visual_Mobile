@@ -12,6 +12,22 @@ class Home extends React.Component {
       Actions.Manhattan()
    }
 
+   goToBrooklyn = () => {
+      Actions.Brooklyn()
+   }
+
+   goToQueens = () => {
+      Actions.Queens()
+   }
+
+   goToStatenIsland = () => {
+      Actions.StatenIsland()
+   }
+
+   goToBronx = () => {
+      Actions.Bronx()
+   }
+   
    render() {
       return (
          <View style={{styles}} >
@@ -21,14 +37,17 @@ class Home extends React.Component {
             <TouchableOpacity onPress={this.goToManhattan}>
                <Text>Manhattan</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={this.goToAbout}>
-               <Text>This is HOME!</Text>
+            <TouchableOpacity onPress={this.goToBrooklyn}>
+               <Text>Brooklyn</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={this.goToAbout}>
-               <Text>This is HOME!</Text>
+            <TouchableOpacity onPress={this.goToQueens}>
+               <Text>Queens</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={this.goToAbout}>
-               <Text>This is HOME!</Text>
+            <TouchableOpacity onPress={this.goToStatenIsland}>
+               <Text>Staten Island</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.goToBronx}>
+               <Text>Bronx</Text>
             </TouchableOpacity>
          </View>
       )
