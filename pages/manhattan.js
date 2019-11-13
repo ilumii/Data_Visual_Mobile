@@ -31,8 +31,8 @@ export default class Manhattan extends React.Component {
 					initialRegion={{
 						latitude: 40.7549,
 						longitude: -73.9840,
-						latitudeDelta: 0.05,
-						longitudeDelta: 0.05
+						latitudeDelta: 0.15,
+						longitudeDelta: 0.15
 					}}
 					showsCompass={false}
 					loadingEnabled={true}>
