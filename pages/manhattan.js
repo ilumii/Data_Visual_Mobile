@@ -1,7 +1,7 @@
 import React from 'react'
 import { TouchableOpacity, Text, Dimensions, StyleSheet, View } from 'react-native'
 import { Actions } from 'react-native-router-flux'
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Polyline, Marker } from 'react-native-maps';
 import axios from 'axios';
 
 export default class Manhattan extends React.Component {
@@ -9,11 +9,50 @@ export default class Manhattan extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            coords: [],
+            issues: []
         }
     }
 
     async componentDidMount() {
         this._isMounted = true;
+        try {
+            let { data } = await axios.get('https://data-visual-api.herokuapp.com/borough/manhattan');
+            let issues = [];
+            let coords = [];
+            console.log(data[0].latitude)
+            data.forEach((e, i) => {
+                if (e.longitude && e.latitude) {
+                    coords.push(
+                        <Marker key={i}
+                            coordinate={{ latitude: e.latitude, longitude: e.longitude }}
+                        />
+                    )
+                    issues.push(
+                        <Polyline key={i}
+                            coordinates={[
+                                { latitude: e.latitude, longitude: e.longitude },
+                                { latitude: e.latitude, longitude: e.longitude + .0001 },
+                                { latitude: e.latitude - .0001, longitude: e.longitude + .0001 },
+                                { latitude: e.latitude - .0001, longitude: e.longitude },
+                                { latitude: e.latitude, longitude: e.longitude }
+                            ]}
+                            strokeColor="#dc143c"
+                            strokeWidth={6}
+                        />
+                    )
+                }
+            });
+            if (this._isMounted) {
+                this.setState({
+                    coords: coords,
+                    issues: issues
+                })
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 
     componentWillUnmount() {
@@ -57,6 +96,19 @@ export default class Manhattan extends React.Component {
                     }}
                     showsCompass={false}
                     loadingEnabled={true}>
+                    {/* {this.state.coords} */}
+                    {this.state.issues}
+                    {/* <Polyline
+                        coordinates={[
+                            { latitude: 40.7549, longitude: -73.9840 },
+                            { latitude: 40.7549, longitude: -73.9841 },
+                            { latitude: 40.7548, longitude: -73.9841 },
+                            { latitude: 40.7548, longitude: -73.9840 },
+                            { latitude: 40.7549, longitude: -73.9840 }
+                        ]}
+                        strokeColor="#dc143c"
+		strokeWidth={6}
+                    /> */}
                 </MapView>
             </View>
         );
