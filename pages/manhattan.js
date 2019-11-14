@@ -61,26 +61,6 @@ export default class Manhattan extends React.Component {
 
     onMapReady = () => this.setState({ marginBottom: 0 })
 
-<<<<<<< HEAD
-	render() {
-		return (
-			<View style={styles.container}>
-				<MapView 
-					onMapReady={this.onMapReady}
-					style={[styles.map, { flex: 1, marginBottom: this.state.marginBottom }]}
-					initialRegion={{
-						latitude: 40.7549,
-						longitude: -73.9840,
-						latitudeDelta: 0.15,
-						longitudeDelta: 0.15
-					}}
-					showsCompass={false}
-					loadingEnabled={true}>
-				</MapView>
-			</View>
-		);
-	}
-=======
     render() {
         return (
             <View style={styles.container}>
@@ -113,7 +93,6 @@ export default class Manhattan extends React.Component {
             </View>
         );
     }
->>>>>>> 55fbab3... test
 }
 
 const styles = StyleSheet.create({
