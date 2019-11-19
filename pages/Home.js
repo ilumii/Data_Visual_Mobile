@@ -8,6 +8,10 @@ class Home extends React.Component {
       Actions.about()
    }
 
+   goToHeatMap = () => {
+      Actions.HeatMap()
+   }
+
    goToManhattan = () => {
       Actions.Manhattan()
    }
@@ -33,6 +37,9 @@ class Home extends React.Component {
          <View style={{styles}} >
             <TouchableOpacity onPress={this.goToAbout}>
                <Text>This is HOME!</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.goToHeatMap}>
+               <Text>HeatMap</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={this.goToManhattan}>
                <Text>Manhattan</Text>

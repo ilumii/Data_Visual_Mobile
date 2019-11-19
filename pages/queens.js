@@ -18,14 +18,15 @@ export default class Queens extends React.Component {
 
 	componentWillUnmount() {
 		this._isMounted = false;
-    }
+	}
 
 	onMapReady = () => this.setState({ marginBottom: 0 })
 
 	render() {
 		return (
 			<View style={styles.container}>
-				<MapView 
+				<MapView
+					provider={PROVIDER_GOOGLE}
 					onMapReady={this.onMapReady}
 					style={[styles.map, { flex: 1, marginBottom: this.state.marginBottom }]}
 					initialRegion={{
