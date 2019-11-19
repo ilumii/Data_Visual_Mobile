@@ -28,19 +28,19 @@ export default class Manhattan extends React.Component {
                             coordinate={{ latitude: e.latitude, longitude: e.longitude }}
                         />
                     )
-                    issues.push(
-                        <Polyline key={i}
-                            coordinates={[
-                                { latitude: e.latitude, longitude: e.longitude },
-                                { latitude: e.latitude, longitude: e.longitude + .0001 },
-                                { latitude: e.latitude - .0001, longitude: e.longitude + .0001 },
-                                { latitude: e.latitude - .0001, longitude: e.longitude },
-                                { latitude: e.latitude, longitude: e.longitude }
-                            ]}
-                            strokeColor="#dc143c"
-                            strokeWidth={6}
-                        />
-                    )
+                    // issues.push(
+                    //     <Polyline key={i}
+                    //         coordinates={[
+                    //             { latitude: e.latitude, longitude: e.longitude },
+                    //             { latitude: e.latitude, longitude: e.longitude + .0001 },
+                    //             { latitude: e.latitude - .0001, longitude: e.longitude + .0001 },
+                    //             { latitude: e.latitude - .0001, longitude: e.longitude },
+                    //             { latitude: e.latitude, longitude: e.longitude }
+                    //         ]}
+                    //         strokeColor="#dc143c"
+                    //         strokeWidth={6}
+                    //     />
+                    // )
                 }
             });
             if (this._isMounted) {
@@ -71,13 +71,13 @@ export default class Manhattan extends React.Component {
                     initialRegion={{
                         latitude: 40.7549,
                         longitude: -73.9840,
-                        latitudeDelta: 0.05,
-                        longitudeDelta: 0.05
+                        latitudeDelta: 0.16,
+                        longitudeDelta: 0.16
                     }}
                     showsCompass={false}
                     loadingEnabled={true}>
-                    {/* {this.state.coords} */}
-                    {this.state.issues}
+                    {this.state.coords}
+                    {/* {this.state.issues} */}
                     {/* <Polyline
                         coordinates={[
                             { latitude: 40.7549, longitude: -73.9840 },
