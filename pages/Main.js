@@ -2,6 +2,7 @@ import React from 'react'
 import { TouchableOpacity, Text, Dimensions, StyleSheet, View } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import { Card } from 'react-native-elements';
 import axios from 'axios';
 
 export default class HomeMap extends React.Component {
@@ -44,6 +45,11 @@ export default class HomeMap extends React.Component {
 	render() {
 		return (
 			<View style={styles.container}>
+				<View style={{ zIndex: 1 }}>
+					<Card>
+						<Text> Please Select A Borough</Text>
+					</Card>
+				</View>
 				<MapView
 					provider={PROVIDER_GOOGLE}
 					onMapReady={this.onMapReady}
@@ -73,8 +79,9 @@ const styles = StyleSheet.create({
 		left: 0,
 		bottom: 0,
 		right: 0,
-		justifyContent: 'flex-end',
-		alignItems: 'center'
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		flexDirection: 'column'
 	},
 	map: {
 		position: 'absolute',
