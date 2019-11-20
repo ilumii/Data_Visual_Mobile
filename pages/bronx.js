@@ -1,20 +1,73 @@
 import React from 'react'
 import { TouchableOpacity, Text, Dimensions, StyleSheet, View } from 'react-native'
 import { Actions } from 'react-native-router-flux'
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Polyline, Marker } from 'react-native-maps';
 import axios from 'axios';
 
 export default class Bronx extends React.Component {
-	_isMounted = false;
-	constructor(props) {
-		super(props);
-		this.state = {
-		}
-	}
+    _isMounted = false;
+    constructor(props) {
+        super(props);
+        this.state = {
+            coords: [],
+            issues: []
+        }
+    }
 
-	async componentDidMount() {
-		this._isMounted = true;
-	}
+    async componentDidMount() {
+        this._isMounted = true;
+        try {
+            let { data } = await axios.get('https://data-visual-api.herokuapp.com/borough/bronx');
+			let coords = [];
+            data.forEach((e, i) => {
+                if (e.longitude && e.latitude) {
+                    coords.push(
+                        <Marker key={i}
+                            coordinate={{ latitude: e.latitude, longitude: e.longitude }}
+                        />
+                    )
+
+                }
+            });
+            if (this._isMounted) {
+                this.setState({
+                    coords: coords,
+                })
+            }
+        }
+        catch(err){
+            console.log(err);
+        }
+        try{
+            let { data } = await axios.get('http://data-visual-api.herokuapp.com/service/bronx');
+			let issues = [];
+            data.forEach((e, i) => {
+                if (e.longitude && e.latitude) {
+                    issues.push(
+                        <Polyline key={i}
+                            coordinates={[
+                                { latitude: e.latitude, longitude: e.longitude },
+                                { latitude: e.latitude, longitude: e.longitude + .0001 },
+                                { latitude: e.latitude - .0001, longitude: e.longitude + .0001 },
+                                { latitude: e.latitude - .0001, longitude: e.longitude },
+                                { latitude: e.latitude, longitude: e.longitude }
+                            ]}
+                            strokeColor="#dc143c"
+                            strokeWidth={6}
+                        />
+                    )
+                }
+            });
+            if (this._isMounted) {
+                this.setState({
+                    issues:issues
+                })
+            }
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
 
 	componentWillUnmount() {
 		this._isMounted = false;
@@ -37,6 +90,8 @@ export default class Bronx extends React.Component {
 					}}
 					showsCompass={false}
 					loadingEnabled={true}>
+					{this.state.coords}
+					{this.state.issues}
 				</MapView>
 			</View>
 		);
