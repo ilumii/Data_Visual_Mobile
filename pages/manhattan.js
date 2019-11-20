@@ -18,9 +18,7 @@ export default class Manhattan extends React.Component {
         this._isMounted = true;
         try {
             let { data } = await axios.get('https://data-visual-api.herokuapp.com/borough/manhattan');
-            let issues = [];
             let coords = [];
-            console.log(data[0].latitude)
             data.forEach((e, i) => {
                 if (e.longitude && e.latitude) {
                     coords.push(
@@ -28,29 +26,45 @@ export default class Manhattan extends React.Component {
                             coordinate={{ latitude: e.latitude, longitude: e.longitude }}
                         />
                     )
-                    // issues.push(
-                    //     <Polyline key={i}
-                    //         coordinates={[
-                    //             { latitude: e.latitude, longitude: e.longitude },
-                    //             { latitude: e.latitude, longitude: e.longitude + .0001 },
-                    //             { latitude: e.latitude - .0001, longitude: e.longitude + .0001 },
-                    //             { latitude: e.latitude - .0001, longitude: e.longitude },
-                    //             { latitude: e.latitude, longitude: e.longitude }
-                    //         ]}
-                    //         strokeColor="#dc143c"
-                    //         strokeWidth={6}
-                    //     />
-                    // )
+
                 }
             });
             if (this._isMounted) {
                 this.setState({
                     coords: coords,
-                    issues: issues
                 })
             }
         }
-        catch (err) {
+        catch(err){
+            console.log(err);
+        }
+        try{
+            let { data } = await axios.get('http://data-visual-api.herokuapp.com/service/Manhattan');
+            let issues = [];
+            data.forEach((e, i) => {
+                if (e.longitude && e.latitude) {
+                    issues.push(
+                        <Polyline key={i}
+                            coordinates={[
+                                { latitude: e.latitude, longitude: e.longitude },
+                                { latitude: e.latitude, longitude: e.longitude + .0001 },
+                                { latitude: e.latitude - .0001, longitude: e.longitude + .0001 },
+                                { latitude: e.latitude - .0001, longitude: e.longitude },
+                                { latitude: e.latitude, longitude: e.longitude }
+                            ]}
+                            strokeColor="#dc143c"
+                            strokeWidth={6}
+                        />
+                    )
+                }
+            });
+            if (this._isMounted) {
+                this.setState({
+                    issues:issues
+                })
+            }
+        }
+        catch(err){
             console.log(err);
         }
     }
@@ -77,18 +91,7 @@ export default class Manhattan extends React.Component {
                     showsCompass={false}
                     loadingEnabled={true}>
                     {this.state.coords}
-                    {/* {this.state.issues} */}
-                    {/* <Polyline
-                        coordinates={[
-                            { latitude: 40.7549, longitude: -73.9840 },
-                            { latitude: 40.7549, longitude: -73.9841 },
-                            { latitude: 40.7548, longitude: -73.9841 },
-                            { latitude: 40.7548, longitude: -73.9840 },
-                            { latitude: 40.7549, longitude: -73.9840 }
-                        ]}
-                        strokeColor="#dc143c"
-		strokeWidth={6}
-                    /> */}
+                    {this.state.issues}
                 </MapView>
             </View>
         );
