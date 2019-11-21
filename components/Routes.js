@@ -12,8 +12,8 @@ import HeatMap from '../pages/heat.js'
 const Routes = () => (
    <Router>
       <Scene key = "root">
-         <Scene key = "home" component = {Home} title = "Home" />
-         <Scene key = "NYC" component = {Main} title = "New York City" initial = {true}/>
+         <Scene key = "home" component = {Home} title = "Home" initial = {true} />
+         <Scene key = "NYC" component = {Main} title = "New York City" />
          <Scene key = "Manhattan" component = {Manhattan} title = "Manhattan" />
          <Scene key = "Queens" component = {Queens} title = "Queens" />
          <Scene key = "Brooklyn" component = {Brooklyn} title = "Brooklyn" />
