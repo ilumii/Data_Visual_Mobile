@@ -19,16 +19,20 @@ export default class StatenIsland extends React.Component {
         try {
             let { data } = await axios.get('https://data-visual-api.herokuapp.com/borough/staten island');
 			let coords = [];
-            data.forEach((e, i) => {
-                if (e.longitude && e.latitude) {
-                    coords.push(
-                        <Marker key={i}
-                            coordinate={{ latitude: e.latitude, longitude: e.longitude }}
-                        />
-                    )
-
-                }
-            });
+			data.forEach((e, i) => {
+				if (e.longitude && e.latitude) {
+					color = e.price <= 100 ? '#ffa500' : (e.price <= 200 && e.price > 100) ? '#ff4500' : '#ff0000';
+					coords.push(
+						<Marker key={i}
+							coordinate={{ latitude: e.latitude, longitude: e.longitude }}
+							pinColor={color}>
+							<MapView.Callout >
+								<Text>Price: ${e.price} per night{"\n"}Number Of Reviews: {e.number_of_reviews}{"\n"}Room Type: {e.room_type}</Text>
+							</MapView.Callout>
+						</Marker>
+					)
+				}
+			});
             if (this._isMounted) {
                 this.setState({
                     coords: coords,

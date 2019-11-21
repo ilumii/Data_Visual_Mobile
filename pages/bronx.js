@@ -5,80 +5,84 @@ import MapView, { PROVIDER_GOOGLE, Polyline, Marker } from 'react-native-maps';
 import axios from 'axios';
 
 export default class Bronx extends React.Component {
-    _isMounted = false;
-    constructor(props) {
-        super(props);
-        this.state = {
-            coords: [],
-            issues: []
-        }
-    }
+	_isMounted = false;
+	constructor(props) {
+		super(props);
+		this.state = {
+			coords: [],
+			issues: []
+		}
+	}
 
-    async componentDidMount() {
-        this._isMounted = true;
-        try {
-            let { data } = await axios.get('https://data-visual-api.herokuapp.com/borough/bronx');
+	async componentDidMount() {
+		this._isMounted = true;
+		try {
+			let { data } = await axios.get('https://data-visual-api.herokuapp.com/borough/bronx');
 			let coords = [];
-            data.forEach((e, i) => {
-                if (e.longitude && e.latitude) {
-                    coords.push(
-                        <Marker key={i}
-                            coordinate={{ latitude: e.latitude, longitude: e.longitude }}
-                        />
-                    )
-
-                }
-            });
-            if (this._isMounted) {
-                this.setState({
-                    coords: coords,
-                })
-            }
-        }
-        catch(err){
-            console.log(err);
-        }
-        try{
-            let { data } = await axios.get('http://data-visual-api.herokuapp.com/service/bronx');
+			data.forEach((e, i) => {
+				if (e.longitude && e.latitude) {
+					color = e.price <= 100 ? '#ffa500' : (e.price <= 200 && e.price > 100) ? '#ff4500' : '#ff0000';
+					coords.push(
+						<Marker key={i}
+							coordinate={{ latitude: e.latitude, longitude: e.longitude }}
+							pinColor={color}>
+							<MapView.Callout >
+								<Text>Price: ${e.price} per night{"\n"}Number Of Reviews: {e.number_of_reviews}{"\n"}Room Type: {e.room_type}</Text>
+							</MapView.Callout>
+						</Marker>
+					)
+				}
+			});
+			if (this._isMounted) {
+				this.setState({
+					coords: coords,
+				})
+			}
+		}
+		catch (err) {
+			console.log(err);
+		}
+		try {
+			let { data } = await axios.get('http://data-visual-api.herokuapp.com/service/bronx');
 			let issues = [];
-            data.forEach((e, i) => {
-                if (e.longitude && e.latitude) {
-                    issues.push(
-                        <Polyline key={i}
-                            coordinates={[
-                                { latitude: e.latitude, longitude: e.longitude },
-                                { latitude: e.latitude, longitude: e.longitude + .0001 },
-                                { latitude: e.latitude - .0001, longitude: e.longitude + .0001 },
-                                { latitude: e.latitude - .0001, longitude: e.longitude },
-                                { latitude: e.latitude, longitude: e.longitude }
-                            ]}
-                            strokeColor="#dc143c"
-                            strokeWidth={6}
-                        />
-                    )
-                }
-            });
-            if (this._isMounted) {
-                this.setState({
-                    issues:issues
-                })
-            }
-        }
-        catch(err){
-            console.log(err);
-        }
-    }
+			data.forEach((e, i) => {
+				if (e.longitude && e.latitude) {
+					issues.push(
+						<Polyline key={i}
+							coordinates={[
+								{ latitude: e.latitude, longitude: e.longitude },
+								{ latitude: e.latitude, longitude: e.longitude + .0001 },
+								{ latitude: e.latitude - .0001, longitude: e.longitude + .0001 },
+								{ latitude: e.latitude - .0001, longitude: e.longitude },
+								{ latitude: e.latitude, longitude: e.longitude }
+							]}
+							strokeColor="#dc143c"
+							strokeWidth={6}
+						/>
+					)
+				}
+			});
+			if (this._isMounted) {
+				this.setState({
+					issues: issues
+				})
+			}
+		}
+		catch (err) {
+			console.log(err);
+		}
+	}
 
 	componentWillUnmount() {
 		this._isMounted = false;
-    }
+	}
 
 	onMapReady = () => this.setState({ marginBottom: 0 })
 
 	render() {
 		return (
 			<View style={styles.container}>
-				<MapView 
+				<MapView
 					provider={PROVIDER_GOOGLE}
 					onMapReady={this.onMapReady}
 					style={[styles.map, { flex: 1, marginBottom: this.state.marginBottom }]}
