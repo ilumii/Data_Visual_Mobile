@@ -1,7 +1,6 @@
 import React from 'react'
-import { TouchableOpacity, Text, Dimensions, StyleSheet, View } from 'react-native'
-import { Actions } from 'react-native-router-flux'
-import MapView, { Heatmap, PROVIDER_GOOGLE, Polyline, Marker } from 'react-native-maps';
+import { Text, StyleSheet, View } from 'react-native'
+import MapView, { Heatmap, PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import axios from 'axios';
 
 export default class Bronx extends React.Component {
@@ -88,7 +87,6 @@ export default class Bronx extends React.Component {
                     showsCompass={false}
                     loadingEnabled={true}>
                     {this.state.coords}
-                    {/* {this.state.issues} */}
                     <Heatmap
                         points={this.state.issues}
                         onZoomRadiusChange={{
@@ -101,7 +99,6 @@ export default class Bronx extends React.Component {
                             colorMapSize : 256
                         }}
                         opacity = {.7}
-                        // gradientSmoothing={10}
                         radius={60}
                         heatmapMode="POINTS_DENSITY"
                     ></Heatmap>
