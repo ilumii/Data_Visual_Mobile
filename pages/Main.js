@@ -23,24 +23,24 @@ export default class HomeMap extends React.Component {
 
 	onMapReady = () => this.setState({ marginBottom: 0 })
 
-	navigate = async (event) => {
-		let coords = await event.coordinate;
-		if (coords.latitude < 40.7 && coords.longitude > -74 && coords.longitude < -73.86) {
-			Actions.Brooklyn();
-		}
-		else if (coords.latitude > 40.81 && coords.longitude > -73.93 && coords.longitude < -73.8) {
-			Actions.Bronx();
-		}
-		else if (coords.latitude < 40.83 && coords.latitude > 40.7 && coords.longitude > -74 && coords.longitude < -73.94) {
-			Actions.Manhattan();
-		}
-		else if (coords.latitude < 40.76 && coords.latitude > 40.71 && coords.longitude < -73.7 && coords.longitude > -73.86) {
-			Actions.Queens();
-		}
-		else if (coords.latitude < 40.63 && coords.latitude > 40.5 && coords.longitude < -74.1 && coords.longitude > -74.2) {
-			Actions.StatenIsland();
-		}
-	}
+    navigate = async (event) => {
+        let coords = await event.coordinate;
+        if (coords.latitude < 40.90 && coords.latitude > 40.83 && coords.longitude < -73.82 && coords.longitude > -73.94) {
+            Actions.Manhattan();
+        }
+        else if (coords.latitude < 40.83 && coords.latitude > 40.70 && coords.longitude < -73.90 && coords.longitude > -74.00) {
+            Actions.Manhattan();
+        }
+        else if (coords.latitude < 40.81 && coords.latitude > 40.67 && coords.longitude < -73.50 && coords.longitude > -73.90) {
+            Actions.Queens();
+        }
+        else if (coords.latitude < 40.70 && coords.latitude > 40.56 && coords.longitude < -73.84 && coords.longitude > -74.035) {
+            Actions.Brooklyn();
+        }
+        else if (coords.latitude < 40.66 && coords.latitude > 40.55 && coords.longitude < -74.05) { // change if scroll enabled
+            Actions.StatenIsland();
+        }
+    }
 
 	render() {
 		return (
