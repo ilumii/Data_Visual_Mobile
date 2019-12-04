@@ -1,7 +1,10 @@
-# Data_Visual_Mobile
-
+# Data_Visualization
+# Requirements
+* Xcode
+* Node
 ## How to Run:
 * git clone https://github.com/ilumii/Data_Visual_Mobile.git
+* npm install
 * $ sudo gem install cocoapods
     * cd ios 
     * pod install
