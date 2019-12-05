@@ -16,7 +16,7 @@ class reactTutorialApp extends Component {
     return (
       <Container>
         <Routes />
-        <Footer>
+        {/* <Footer>
           <FooterTab>
             <Button onPress={()=>this.setState({activePage:1})}>
               <Icon style={this.state.activePage === 1 ? { color: '#1E90FF', fontSize: 20 } : { fontSize: 20 }} name="ios-subway" />
@@ -28,7 +28,7 @@ class reactTutorialApp extends Component {
               <Icon style={this.state.activePage === 3 ? { color: '#1E90FF', fontSize: 20 } : { fontSize: 20 }} name="logo-twitter" type="Ionicons" />
             </Button>
           </FooterTab>
-        </Footer>
+        </Footer> */}
       </Container>
     )
   }

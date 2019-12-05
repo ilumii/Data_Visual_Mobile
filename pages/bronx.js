@@ -20,7 +20,7 @@ export default class Bronx extends React.Component {
             let coords = [];
             data.forEach((e, i) => {
                 if (e.longitude && e.latitude) {
-                    color = e.price <= 100 ? '#ffa500' : (e.price <= 200 && e.price > 100) ? '#ff4500' : '#ff0000';
+                    color = e.price <= 100 ? 'yellow' : (e.price <= 200 && e.price > 100) ? 'orange' : '#ff0000';
                     coords.push(
                         <Marker key={i}
                             coordinate={{ latitude: e.latitude, longitude: e.longitude }}
