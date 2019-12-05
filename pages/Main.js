@@ -26,12 +26,12 @@ export default class HomeMap extends React.Component {
     navigate = async (event) => {
         let coords = await event.coordinate;
         if (coords.latitude < 40.90 && coords.latitude > 40.83 && coords.longitude < -73.82 && coords.longitude > -73.94) {
-            Actions.Manhattan();
+            Actions.Bronx();
         }
         else if (coords.latitude < 40.83 && coords.latitude > 40.70 && coords.longitude < -73.90 && coords.longitude > -74.00) {
             Actions.Manhattan();
         }
-        else if (coords.latitude < 40.81 && coords.latitude > 40.67 && coords.longitude < -73.50 && coords.longitude > -73.90) {
+        else if (coords.latitude < 40.81 && coords.latitude > 40.64 && coords.longitude < -73.50 && coords.longitude > -73.90) {
             Actions.Queens();
         }
         else if (coords.latitude < 40.70 && coords.latitude > 40.56 && coords.longitude < -73.84 && coords.longitude > -74.035) {
